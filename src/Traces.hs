@@ -15,6 +15,9 @@ type I = Set
 type D = Set
 type FNF = [String]
 
+computeD :: Alphabet -> I -> D
+computeD alph ind = [(x,y) | x <- alph, y <- alph, (x,y) `notElem` ind]
+
 wordToFNF :: String -> REnv FNF
 wordToFNF word = createStacks word >>= stacksToFNF
 
