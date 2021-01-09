@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 1ea2130482281aa393a4ea3380b193116edc0ea577a82d5f07423803f279ec7a
+-- hash: a7eece2126d2267f0257bd10a084424abc96e4df7e5e107c68f5e2c3a013a651
 
 name:           traces
 version:        0.0.0.1
@@ -28,7 +28,10 @@ source-repository head
 library
   exposed-modules:
       Lib
-      Traces
+      Traces.FNF
+      Traces.Graph
+      Traces.Trace
+      Traces.Types
   other-modules:
       Paths_traces
   hs-source-dirs:
