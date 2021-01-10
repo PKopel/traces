@@ -1,7 +1,12 @@
 module Traces.Graph where
 
 import           Control.Monad.Reader           ( asks )
-import           Traces.Types
+import           Traces.Types                   ( Env(dependent)
+                                                , Graph
+                                                , Edge
+                                                , Min
+                                                , REnv
+                                                )
 
 
 wordToGraph :: String -> REnv Graph
@@ -24,17 +29,17 @@ minSetLoop (a : minTail, graph@(word, vs, es)) minSet v = do
       newGraph = if (la, lv) `elem` dep then (word, vs, (v, a) : es) else graph
   minSetLoop (minTail, newGraph) (a : minSet) v
 
-minimizeGraph :: [(Int, Int)] -> Graph -> REnv Graph
+minimizeGraph :: [Edge] -> Graph -> REnv Graph
 minimizeGraph minEs (word, vs, []    ) = return (word, vs, minEs)
 minimizeGraph minEs (word, vs, e : es) = do
   redundant <- checkEdge word e
   let newMinEs = if redundant then minEs else e : minEs
   minimizeGraph newMinEs (word, vs, es)
 
-checkEdge :: String -> (Int, Int) -> REnv Bool
+checkEdge :: String -> Edge -> REnv Bool
 checkEdge word e@(a, _) = checkEdgeLoop word e a
 
-checkEdgeLoop :: String -> (Int, Int) -> Int -> REnv Bool
+checkEdgeLoop :: String -> Edge -> Int -> REnv Bool
 checkEdgeLoop word (a, b) i
   | i == b - 1 = return False
   | otherwise = do

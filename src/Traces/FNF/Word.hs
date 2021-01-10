@@ -1,4 +1,4 @@
-module Traces.FNF where
+module Traces.FNF.Word where
 
 import           Data.Map                      as Map
                                                 ( empty
@@ -11,7 +11,12 @@ import           Data.List                     as List
 import           Control.Monad.Reader           ( foldM
                                                 , asks
                                                 )
-import           Traces.Types
+import           Traces.Types                   ( Env(alph, dependent)
+                                                , FNF
+                                                , Item(..)
+                                                , REnv
+                                                , Stacks
+                                                )
 
 wordToFNF :: String -> REnv FNF
 wordToFNF word = createStacks word >>= stacksToFNF
