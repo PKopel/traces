@@ -1,4 +1,7 @@
-module Traces.FNF.Word where
+module Traces.FNF.Word
+  ( wordToFNF
+  )
+where
 
 import           Data.Map                      as Map
                                                 ( empty

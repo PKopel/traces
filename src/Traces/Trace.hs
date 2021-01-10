@@ -7,14 +7,13 @@ import           Traces.Types
 count :: Eq a => a -> [a] -> Int
 count x = length . filter (x ==)
 
-computeD :: Alphabet -> I -> D
-computeD alph ind = [ (x, y) | x <- alph, y <- alph, (x, y) `notElem` ind ]
+complement :: Eq a => [a] -> [(a, a)] -> [(a, a)]
+complement alph ind = [ (x, y) | x <- alph, y <- alph, (x, y) `notElem` ind ]
 
 computeTrace :: String -> REnv Trace
 computeTrace w = do
   ind <- asks independent
   return $ filter (eqvI ind w) $ permutations w
-
 
 eqvI :: I -> String -> String -> Bool
 eqvI ind (a : t) (b : s) =

@@ -1,4 +1,7 @@
-module Traces.Graph where
+module Traces.Graph
+  ( wordToGraph
+  )
+where
 
 import           Control.Monad.Reader           ( asks )
 import           Traces.Types                   ( Env(dependent)

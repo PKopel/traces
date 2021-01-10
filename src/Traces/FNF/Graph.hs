@@ -1,4 +1,7 @@
-module Traces.FNF.Graph where
+module Traces.FNF.Graph
+  ( graphToFNF
+  )
+where
 
 import qualified Data.List                     as List
 import           Traces.Types                   ( FNF
