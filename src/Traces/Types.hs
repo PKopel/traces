@@ -15,5 +15,5 @@ type D = Set
 type FNF = [String]
 type Trace = [String]
 type Stacks = Map Char [Item]
-type Graph = ([Int], [(Int, Int)])
+type Graph = (String, [Int], [(Int, Int)])
 type Min = [Int]
