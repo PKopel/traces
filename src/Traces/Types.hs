@@ -3,7 +3,7 @@ module Traces.Types where
 import           Control.Monad.Reader           ( Reader )
 import           Data.Map                       ( Map )
 
-data Item = Marker | Letter Char
+data Item = Marker | Letter Char deriving (Show)
 
 data Env = Env { alph :: Alphabet, independent :: I, dependent :: D} deriving (Show)
 type REnv a = Reader Env a

@@ -1,31 +1,20 @@
-module Traces.FNF.Word
-  ( wordToFNF
-  )
-where
+module Traces.FNF.Word where
 
-import           Data.Map                      as Map
-                                                ( empty
-                                                , insert
-                                                , lookup
+import qualified Data.Map                      as Map
+import qualified Data.List                     as List
+                                                ( foldl
                                                 , null
                                                 )
-import           Data.List                     as List
-                                                ( foldl )
 import           Control.Monad.Reader           ( foldM
                                                 , asks
                                                 )
-import           Traces.Types                   ( Env(alph, dependent)
-                                                , FNF
-                                                , Item(..)
-                                                , REnv
-                                                , Stacks
-                                                )
+import           Traces.Types
 
 wordToFNF :: String -> REnv FNF
 wordToFNF word = createStacks word >>= stacksToFNF
 
 createStacks :: String -> REnv Stacks
-createStacks = foldM placeMarkers Map.empty
+createStacks word = Map.map reverse <$> foldM placeMarkers Map.empty word
 
 placeMarkers :: Stacks -> Char -> REnv Stacks
 placeMarkers stacks char = do
@@ -51,18 +40,19 @@ stacksToFNF stacks = stacksToFNFAcc stacks []
 
 stacksToFNFAcc :: Stacks -> FNF -> REnv FNF
 stacksToFNFAcc stacks acc
-  | Map.null stacks = return acc
+  | Map.foldl (\b is -> b && List.null is) True stacks = return $ reverse acc
   | otherwise = do
-    rAlph               <- asks (reverse . alph)
-    dep                 <- asks dependent
-    (newStacks, newAcc) <- foldM findStep (stacks, acc) rAlph
-    stacksToFNFAcc newStacks ([] : newAcc)
+    rAlph     <- asks (reverse . alph)
+    dep       <- asks dependent
+    newAcc    <- foldM (findStep stacks) ([] : acc) rAlph
+    newStacks <- foldM rmMarkers stacks (head newAcc)
+    stacksToFNFAcc newStacks newAcc
 
-findStep :: (Stacks, FNF) -> Char -> REnv (Stacks, FNF)
-findStep (stacks, acc@(step : rest)) char = case Map.lookup char stacks of
-  Just ((Letter l) : lStack) -> rmMarkers stacks l >>= \newStacks ->
-    return (Map.insert l lStack newStacks, (l : step) : rest)
-  _ -> return (stacks, acc)
+findStep :: Stacks -> FNF -> Char -> REnv FNF
+findStep stacks acc@(step : rest) char =
+  return $ case Map.lookup char stacks of
+    Just ((Letter l) : _) -> (l : step) : rest
+    _                     -> acc
 
 rmMarkers :: Stacks -> Char -> REnv Stacks
 rmMarkers stacks char = do
@@ -72,7 +62,9 @@ rmMarkers stacks char = do
     (\newStacks c -> if (char, c) `elem` dep
       then case Map.lookup c newStacks of
         Just (Marker : rest) -> Map.insert c rest newStacks
-        _                    -> newStacks
+        Just (Letter l : rest) ->
+          if l == char then Map.insert c rest newStacks else newStacks
+        _ -> newStacks
       else newStacks
     )
     stacks

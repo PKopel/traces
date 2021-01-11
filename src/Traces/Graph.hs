@@ -4,13 +4,7 @@ module Traces.Graph
 where
 
 import           Control.Monad.Reader           ( asks )
-import           Traces.Types                   ( Env(dependent)
-                                                , Graph
-                                                , Edge
-                                                , Min
-                                                , REnv
-                                                )
-
+import           Traces.Types
 
 wordToGraph :: String -> REnv Graph
 wordToGraph word =
