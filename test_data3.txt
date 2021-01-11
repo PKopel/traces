@@ -1,0 +1,3 @@
+abcde
+{(a,c),(a,d),(b,d),(b,e),(c,a),(d,a),(d,b),(e,b)}
+acebdac

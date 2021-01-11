@@ -1,20 +1,22 @@
-[(d,d),(d,c),(d,b),(c,d),(c,c),(c,a),(b,d),(b,b),(b,a),(a,c),(a,b),(a,a)]
-["baadcb","bdaacb","badacb","cdaabb","cadabb","caadbb","cbaadb","cabadb","caabdb","cbdaab","bdacab","cdbaab","cdabab","cbadab","badcab","cabdab","cadbab","baadbc","bdabac","bdaabc","badbac","badabc","cbdbaa","cbdaba","cdbbaa","cdbaba","cdabba","bdabca","bdacba","cbadba","cabdba","cadbba","badbca","badcba","cbaabd","cababd","caabbd"]
-(b)(ad)(a)(bc)
+[(e,e),(e,d),(e,c),(e,a),(d,e),(d,d),(d,c),(c,e),(c,d),(c,c),(c,b),(b,c),(b,b),(b,a),(a,e),(a,b),(a,a)]
+["acebdac","caebdac","acbedac","cabedac","acedbac","caedbac","acebadc","caebadc","acbeadc","cabeadc","caedbca","acedbca","caebdca","acebdca","cabedca","acbedca"]
+(ac)(be)(ad)(c)
 digraph g{
-	4 -> 5
+	5 -> 7
+	4 -> 7
 	4 -> 6
 	3 -> 6
 	3 -> 5
 	2 -> 3
-	1 -> 2
+	2 -> 4
 	1 -> 4
-	1[label=b]
-	2[label=a]
-	3[label=a]
-	4[label=d]
-	5[label=c]
-	6[label=b]
-
+	1 -> 3
+	1[label=a]
+	2[label=c]
+	3[label=e]
+	4[label=b]
+	5[label=d]
+	6[label=a]
+	7[label=c]
 }
-(b)(ad)(a)(bc)
+(ac)(be)(ad)(c)
