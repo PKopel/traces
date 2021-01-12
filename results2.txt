@@ -1,0 +1,23 @@
+[(f,f),(f,e),(f,d),(f,b),(f,a),(e,f),(e,e),(e,d),(e,c),(e,a),(d,f),(d,e),(d,d),(d,b),(c,e),(c,c),(c,b),(c,a),(b,f),(b,d),(b,c),(b,b),(b,a),(a,f),(a,e),(a,c),(a,b),(a,a)]
+["acdcfbbe","daccfbbe","adccfbbe","accdfbbe","acdfcbbe","adfccbbe","adcfcbbe","dafccbbe","dacfcbbe","acdcfebb","acdcfbeb","adccfebb","adccfbeb","daccfebb","daccfbeb","accdfebb","accdfbeb","acdfcebb","acdfcbeb","adfccebb","adfccbeb","dafccebb","dafccbeb","adcfcebb","adcfcbeb","dacfcebb","dacfcbeb"]
+(ad)(cf)(c)(be)(b)
+digraph g{
+	6 -> 7
+	5 -> 6
+	5 -> 8
+	4 -> 8
+	4 -> 6
+	3 -> 5
+	2 -> 4
+	1 -> 2
+	1 -> 5
+	1[label=a]
+	2[label=c]
+	3[label=d]
+	4[label=c]
+	5[label=f]
+	6[label=b]
+	7[label=b]
+	8[label=e]
+}
+(ad)(cf)(c)(be)(b)
