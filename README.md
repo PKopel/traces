@@ -1,6 +1,7 @@
 # traces
 
 Small program computing dependency relation, trace, FNF and Hasse diagram of a given word.
+More on [traces theory (Wikipedia)](https://en.wikipedia.org/wiki/Trace_theory).
 
 ## Usage
 
