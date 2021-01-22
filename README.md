@@ -1,6 +1,6 @@
 # traces
 
-Small program computing dependency relation, trace, FNF and Hasse diagram of a given word.
+Small program computing dependency relation, trace, FNF and Hasse diagram (in Dot format) of a given word.
 
 ## Usage
 
