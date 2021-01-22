@@ -1,6 +1,10 @@
 # traces
 
+
 Small program computing dependency relation, trace, FNF and Hasse diagram (in Dot format) of a given word.
+More on [trace theory (Wikipedia)](https://en.wikipedia.org/wiki/Trace_theory). Algorithms used 
+in this program are taken from or based on ["Partial Commutation and Traces"](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.38.4401&rep=rep1&type=pdf)
+
 
 ## Usage
 
