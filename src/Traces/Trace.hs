@@ -5,7 +5,6 @@ module Traces.Trace
 where
 
 import qualified Data.List                     as List
-import           Data.Functor                   ( (<&>) )
 import           Control.Monad.Reader           ( asks )
 import           Control.Monad                  ( filterM )
 import           Traces.Types
@@ -13,14 +12,15 @@ import           Traces.Types
 complement :: Eq a => [a] -> [(a, a)] -> [(a, a)]
 complement alph ind = [ (x, y) | x <- alph, y <- alph, (x, y) `notElem` ind ]
 
-computeTrace :: String -> REnv Trace
-computeTrace word = do
-  ind <- asks independent
-  nc  <- findNonCommutable word
+computeTrace :: REnv Trace
+computeTrace = do
+  word <- asks word
+  ind  <- asks independent
+  nc   <- findNonCommutable word
   List.nub <$> filterM (eqvI nc) (List.permutations word)
 
 eqvI :: [String] -> String -> REnv Bool
-eqvI nc string = findNonCommutable string <&> null . (nc List.\\)
+eqvI nc string = null . (nc List.\\) <$> findNonCommutable string
 
 findNonCommutable :: String -> REnv [String]
 findNonCommutable = findNonCommutableAcc []

@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 007f365cc015096fedda7138775e07052b8fce0bc3eb575b544b12bddfafeb9c
+-- hash: b0925c304174b64c72146778fc48141aeb713b6a0c8b62ef85103efe9057d745
 
 name:           traces
-version:        0.0.1.1
+version:        0.0.2.0
 description:    Please see the README on GitHub at <https://github.com/PKopel/traces#readme>
 homepage:       https://github.com/PKopel/traces#readme
 bug-reports:    https://github.com/PKopel/traces/issues

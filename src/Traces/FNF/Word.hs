@@ -10,11 +10,11 @@ import           Control.Monad.Reader           ( foldM
                                                 )
 import           Traces.Types
 
-wordToFNF :: String -> REnv FNF
-wordToFNF word = createStacks word >>= stacksToFNF
+wordToFNF :: REnv FNF
+wordToFNF = createStacks >>= stacksToFNF
 
-createStacks :: String -> REnv Stacks
-createStacks word = Map.map reverse <$> foldM placeMarkers Map.empty word
+createStacks :: REnv Stacks
+createStacks = Map.map reverse <$> (asks word >>= foldM placeMarkers Map.empty)
 
 placeMarkers :: Stacks -> Char -> REnv Stacks
 placeMarkers stacks char = do

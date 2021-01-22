@@ -32,8 +32,10 @@ fnfToStringAcc string []           = string
 fnfToStringAcc string (step : fnf) = fnfToStringAcc (addStep string) fnf
   where addStep string = '(' : step ++ ')' : string
 
-graphToString :: Graph -> String
-graphToString graph@(_, _, es) = graphToStringLabelsAcc edgesString graph
+graphToString :: String -> Graph -> String
+graphToString word graph@(_, es) = graphToStringLabelsAcc edgesString
+                                                          word
+                                                          graph
   where edgesString = graphToStringEdgesAcc "digraph g{\n" es
 
 graphToStringEdgesAcc :: String -> [Edge] -> String
@@ -43,9 +45,10 @@ graphToStringEdgesAcc string ((a, b) : es) = graphToStringEdgesAcc
   es
   where edgeString = '\t' : show a ++ " -> " ++ show b ++ "\n"
 
-graphToStringLabelsAcc :: String -> Graph -> String
-graphToStringLabelsAcc string (_, []    , _ ) = string ++ "}"
-graphToStringLabelsAcc string (w, v : vs, es) = graphToStringLabelsAcc
+graphToStringLabelsAcc :: String -> String -> Graph -> String
+graphToStringLabelsAcc string word ([]    , _ ) = string ++ "}"
+graphToStringLabelsAcc string word (v : vs, es) = graphToStringLabelsAcc
   (string ++ labelString)
-  (w, vs, es)
-  where labelString = '\t' : show v ++ "[label=" ++ (w !! (v - 1)) : "]\n"
+  word
+  (vs, es)
+  where labelString = '\t' : show v ++ "[label=" ++ (word !! (v - 1)) : "]\n"
