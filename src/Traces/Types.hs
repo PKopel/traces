@@ -5,7 +5,7 @@ import           Data.Map                       ( Map )
 
 data Item = Marker | Letter Char deriving (Show)
 
-data Env = Env { alph :: Alphabet, independent :: I, dependent :: D} deriving (Show)
+data Env = Env { alph :: Alphabet, independent :: I, dependent :: D, word :: String } deriving (Show)
 type REnv a = Reader Env a
 
 type Alphabet = String
@@ -16,5 +16,5 @@ type FNF = [String]
 type Trace = [String]
 type Stacks = Map Char [Item]
 type Edge = (Int, Int)
-type Graph = (String, [Int], [Edge])
+type Graph = ([Int], [Edge])
 type Min = [Int]
